@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial Interactivo de PSeInt</title>
+  <!-- Enlazamos la hoja de estilos -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Aprende PSeInt desde cero</h1>
+    <!-- Barra de navegación -->
+    <nav>
+      <ul class="nav-list">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#instalacion">Instalación</a></li>
+        <li><a href="#basico">Variables y Operaciones</a></li>
+        <li><a href="#condiciones">Condicionales</a></li>
+        <li><a href="#bucles">Bucles</a></li>
+        <li><a href="#extra">Ejercicios</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sección de introducción -->
+    <section id="inicio" class="section">
+      <h2>¿Qué es PSeInt?</h2>
+      <p>
+        PSeInt es una herramienta educativa gratuita que ayuda a los
+        estudiantes a dar sus primeros pasos en la construcción de
+        algoritmos. Utiliza un pseudolenguaje sencillo en español para
+        centrarse en los conceptos fundamentales de la algoritmia sin
+        preocuparse por la sintaxis de un lenguaje de programación
+        concreto. Con un entorno de edición intuitivo y ayudas
+        integradas, PSeInt facilita la escritura de algoritmos y
+        permite interpretar (ejecutar) el pseudocódigo de forma
+        interactiva.
+      </p>
+      <p>
+        El pseudocódigo se utiliza como primer contacto para comprender
+        estructuras de control, expresiones y variables, eliminando
+        obstáculos propios de otros lenguajes. En este tutorial
+        aprenderás los conceptos básicos de PSeInt de manera
+        interactiva y dinámica.
+      </p>
+      <div class="quiz">
+        <h3>Verifica tu comprensión</h3>
+        <div class="quiz-question" data-correct="b">
+          <p>¿Cuál es el objetivo principal de PSeInt?</p>
+          <label><input type="radio" name="q1" value="a" /> Servir como un compilador de C++.</label><br />
+          <label><input type="radio" name="q1" value="b" /> Asistir a los estudiantes en sus primeros pasos de programación mediante un pseudolenguaje en español.</label><br />
+          <label><input type="radio" name="q1" value="c" /> Diseñar interfaces gráficas.</label><br />
+        </div>
+        <div class="quiz-question" data-correct="c">
+          <p>¿Por qué se utiliza pseudocódigo antes de un lenguaje real?</p>
+          <label><input type="radio" name="q2" value="a" /> Porque es más rápido de ejecutar que cualquier lenguaje.</label><br />
+          <label><input type="radio" name="q2" value="b" /> Porque se parece al lenguaje ensamblador.</label><br />
+          <label><input type="radio" name="q2" value="c" /> Porque permite concentrarse en la lógica del algoritmo sin la complejidad de una sintaxis estricta.</label><br />
+        </div>
+        <button class="btn" id="checkIntroQuiz">Comprobar</button>
+        <p id="introQuizResult" class="quiz-result"></p>
+      </div>
+    </section>
+
+    <!-- Sección de instalación -->
+    <section id="instalacion" class="section">
+      <h2>Instalación de PSeInt</h2>
+      <p>
+        A continuación se describen los pasos básicos para instalar PSeInt en los sistemas operativos
+        de escritorio más comunes. Estos procedimientos provienen de la página oficial de PSeInt y
+        están resumidos aquí para que cualquiera pueda empezar rápidamente. Recuerda descargar la
+        última versión estable desde la sección de descargas de SourceForge.
+      </p>
+      <h3>Windows</h3>
+      <ol>
+        <li>Visita la página oficial de PSeInt y descarga el instalador para Windows.</li>
+        <li>Ejecuta el archivo <code>.exe</code> descargado y sigue las instrucciones del asistente.</li>
+        <li>Si prefieres una versión portátil, descarga el paquete comprimido, descomprímelo y
+            ejecuta <code>wxPSeInt.exe</code> desde la carpeta extraída.
+        </li>
+      </ol>
+      <h3>GNU/Linux</h3>
+      <ol>
+        <li>Descarga el paquete <code>.tgz</code> adecuado a tu arquitectura. Si no sabes cuál elegir,
+            ejecuta <code>uname -m</code> en una terminal; si el resultado es <code>x86_64</code> utiliza
+            la versión de 64 bits, en caso contrario la de 32 bits.
+        </li>
+        <li>Descomprime el paquete con <code>tar -xzvf archivo.tgz</code> y accede al directorio
+            <code>pseint</code>.
+        </li>
+        <li>Ejecuta el archivo <code>pseint</code>:
+          <pre>cd pseint
+./pseint</pre>
+          La primera vez que lo ejecutes se te ofrecerá crear accesos directos en el menú y en el
+          escritorio.
+        </li>
+        <li>Si la aplicación muestra mensajes sobre bibliotecas faltantes, instálalas con el gestor
+            de paquetes de tu distribución.
+        </li>
+      </ol>
+      <h3>macOS</h3>
+      <ol>
+        <li>Descarga el archivo comprimido para macOS desde la página oficial.</li>
+        <li>Descomprime el fichero haciendo doble clic; obtendrás la aplicación PSeInt.</li>
+        <li>Para instalarla entre las aplicaciones del sistema, arrastra el icono de PSeInt a la carpeta
+            <em>Aplicaciones</em> en Finder.</li>
+        <li>En la primera ejecución puede aparecer un mensaje de seguridad. Haz clic con el botón derecho
+            sobre la aplicación, selecciona <em>Abrir</em> y confirma la ejecución en el cuadro de
+            diálogo.
+        </li>
+      </ol>
+    </section>
+
+    <!-- Sección de variables y operaciones -->
+    <section id="basico" class="section">
+      <h2>Variables, Entrada/Salida y Operaciones</h2>
+      <p>
+        En PSeInt puedes <strong>definir variables</strong> utilizando la
+        instrucción <code>Definir nombre Como Tipo</code>, donde el tipo
+        puede ser <em>Entero</em>, <em>Real</em>, <em>Lógico</em> o
+        <em>Cadena</em>. Para solicitar datos al usuario empleamos
+        <code>Leer</code>, y para mostrar información se usa
+        <code>Escribir</code>.
+      </p>
+      <p>
+        La asignación de valores se realiza con la flecha
+        <code>&lt;-</code>, que indica que el resultado de una expresión se
+        almacena en la variable de la izquierda. PSeInt soporta
+        operaciones aritméticas básicas como suma (+), resta (−),
+        multiplicación (*), división (/) y módulo (<code>%</code>).
+      </p>
+
+      <div class="example">
+        <h3>Ejemplo interactivo: Suma de dos números</h3>
+        <p>
+          Observa el siguiente algoritmo. Introduce dos números y
+          presiona «Ejecutar» para ver el resultado. También puedes
+          ejecutar el algoritmo paso a paso.
+        </p>
+        <pre id="sumCode" class="code-block">
+Algoritmo SumaDosNumeros
+    Definir a, b, suma Como Entero
+    Escribir "Ingrese primer número:"
+    Leer a
+    Escribir "Ingrese segundo número:"
+    Leer b
+    suma <- a + b
+    Escribir "La suma es: ", suma
+FinAlgoritmo
+        </pre>
+        <div class="inputs">
+          <label for="inputA">a: <input type="number" id="inputA" value="" /></label>
+          <label for="inputB">b: <input type="number" id="inputB" value="" /></label>
+        </div>
+        <div class="controls">
+          <button class="btn" id="runSum">Ejecutar</button>
+          <button class="btn" id="stepSum">Paso a Paso</button>
+          <button class="btn" id="resetSum">Reiniciar</button>
+        </div>
+        <div class="output" id="sumOutput"></div>
+      </div>
+
+      <div class="exercise">
+        <h3>Ejercicio: Completa el pseudocódigo</h3>
+        <p>Completa el algoritmo para calcular el producto de dos números. Rellena las palabras faltantes:</p>
+        <pre class="code-fill">
+Algoritmo ProductoDosNumeros
+    <input type="text" class="blank" data-answer="Definir" /> x, y, producto Como Entero
+    <input type="text" class="blank" data-answer="Escribir" /> "Ingrese el primer número:"
+    <input type="text" class="blank" data-answer="Leer" /> x
+    <input type="text" class="blank" data-answer="Escribir" /> "Ingrese el segundo número:"
+    <input type="text" class="blank" data-answer="Leer" /> y
+    producto <- x * y
+    <input type="text" class="blank" data-answer="Escribir" /> "El producto es:", producto
+FinAlgoritmo
+        </pre>
+        <button class="btn" id="checkProduct">Comprobar</button>
+        <p id="productResult" class="exercise-result"></p>
+      </div>
+    </section>
+
+    <!-- Sección de condicionales -->
+    <section id="condiciones" class="section">
+      <h2>Estructuras Condicionales</h2>
+      <p>
+        Las estructuras condicionales permiten que un algoritmo tome
+        decisiones. En PSeInt se utiliza la instrucción
+        <code>Si condición Entonces ... Sino ... FinSi</code> para
+        evaluar una condición y ejecutar un bloque de instrucciones u otro.
+      </p>
+      <p>
+        La condición es una expresión lógica (verdadera o falsa). Por
+        ejemplo, para comprobar si un número es par se puede evaluar
+        si el resto de dividirlo por 2 es igual a cero.
+      </p>
+      <div class="example">
+        <h3>Ejemplo interactivo: Número Par o Impar</h3>
+        <pre id="parCode" class="code-block">
+Algoritmo ParOImpar
+    Definir n Como Entero
+    Escribir "Ingrese un número:"
+    Leer n
+    Si n % 2 = 0 Entonces
+        Escribir "El número es par"
+    Sino
+        Escribir "El número es impar"
+    FinSi
+FinAlgoritmo
+        </pre>
+        <div class="inputs">
+          <label for="inputN">n: <input type="number" id="inputN" value="" /></label>
+        </div>
+        <div class="controls">
+          <button class="btn" id="runPar">Ejecutar</button>
+        </div>
+        <div class="output" id="parOutput"></div>
+      </div>
+      <div class="quiz">
+        <h3>Pregunta rápida</h3>
+        <div class="quiz-question" data-correct="a">
+          <p>¿Qué palabra clave se utiliza para cerrar una estructura condicional en PSeInt?</p>
+          <label><input type="radio" name="q3" value="a" /> FinSi</label><br />
+          <label><input type="radio" name="q3" value="b" /> FinPara</label><br />
+          <label><input type="radio" name="q3" value="c" /> Hasta</label><br />
+        </div>
+        <button class="btn" id="checkIfQuiz">Comprobar</button>
+        <p id="ifQuizResult" class="quiz-result"></p>
+      </div>
+    </section>
+
+    <!-- Sección de bucles -->
+    <section id="bucles" class="section">
+      <h2>Bucles y Repetición</h2>
+      <p>
+        Los bucles o estructuras de repetición permiten ejecutar un
+        conjunto de instrucciones varias veces. En PSeInt existen tres
+        estructuras básicas: <strong>Para</strong> (un número conocido de
+        iteraciones), <strong>Mientras</strong> (repite mientras se
+        cumpla una condición) y <strong>Repetir ... Hasta</strong>
+        (repite al menos una vez, hasta que la condición sea verdadera).
+      </p>
+      <div class="example">
+        <h3>Ejemplo interactivo: Suma de 1 hasta N (bucle Para)</h3>
+        <pre id="sumaNCode" class="code-block">
+Algoritmo Sumar1HastaN
+    Definir n, i, suma Como Entero
+    Escribir "Ingrese un número positivo:"
+    Leer n
+    suma <- 0
+    Para i <- 1 Hasta n Con Paso 1 Hacer
+        suma <- suma + i
+    FinPara
+    Escribir "La suma desde 1 hasta ", n, " es ", suma
+FinAlgoritmo
+        </pre>
+        <div class="inputs">
+          <label for="inputN2">n: <input type="number" id="inputN2" value="" min="1" /></label>
+        </div>
+        <div class="controls">
+          <button class="btn" id="runSumaN">Ejecutar</button>
+        </div>
+        <div class="output" id="sumaNOutput"></div>
+      </div>
+      <div class="exercise">
+        <h3>Ejercicio: Completa el pseudocódigo del factorial</h3>
+        <p>Rellena los espacios para construir un algoritmo que calcule el factorial de un número (n!).</p>
+        <pre class="code-fill">
+Algoritmo Factorial
+    <input type="text" class="blank" data-answer="Definir" /> n, i, fact Como Entero
+    Escribir "Ingrese un número:" 
+    <input type="text" class="blank" data-answer="Leer" /> n
+    fact <- 1
+    Para i <- 1 Hasta n Con Paso 1 Hacer
+        fact <- fact * i
+    <input type="text" class="blank" data-answer="FinPara" />
+    <input type="text" class="blank" data-answer="Escribir" /> "El factorial de ", n, " es ", fact
+FinAlgoritmo
+        </pre>
+        <button class="btn" id="checkFactorial">Comprobar</button>
+        <p id="factorialResult" class="exercise-result"></p>
+      </div>
+    </section>
+
+    <!-- Sección de ejercicios adicionales -->
+    <section id="extra" class="section">
+      <h2>Práctica adicional</h2>
+      <p>
+        Ahora que conoces las bases, intenta resolver los siguientes
+        problemas por tu cuenta. Escribe tu pseudocódigo en el cuadro
+        y luego compáralo con una solución sugerida.
+      </p>
+      <div class="exercise">
+        <h3>1. Calcular el área de un rectángulo</h3>
+        <p>Escribe un algoritmo que solicite la base y la altura de un rectángulo y muestre su área.</p>
+        <textarea id="rectanguloCode" rows="6" placeholder="Escribe aquí tu pseudocódigo..."></textarea>
+        <button class="btn" id="showRectangulo">Mostrar una posible solución</button>
+        <pre id="rectanguloSolution" class="solution" style="display:none;">
+Algoritmo AreaRectangulo
+    Definir base, altura, area Como Real
+    Escribir "Ingrese la base:" 
+    Leer base
+    Escribir "Ingrese la altura:" 
+    Leer altura
+    area <- base * altura
+    Escribir "El área del rectángulo es:", area
+FinAlgoritmo
+        </pre>
+      </div>
+      <div class="exercise">
+        <h3>2. Contador de números positivos y negativos</h3>
+        <p>Solicita diez números al usuario e indica cuántos son positivos y cuántos negativos.</p>
+        <textarea id="contadorCode" rows="8" placeholder="Escribe aquí tu pseudocódigo..."></textarea>
+        <button class="btn" id="showContador">Mostrar una posible solución</button>
+        <pre id="contadorSolution" class="solution" style="display:none;">
+Algoritmo ContarPositivosNegativos
+    Definir i, num, positivos, negativos Como Entero
+    positivos <- 0
+    negativos <- 0
+    Para i <- 1 Hasta 10 Hacer
+        Escribir "Ingrese un número:" 
+        Leer num
+        Si num > 0 Entonces
+            positivos <- positivos + 1
+        Sino
+            Si num < 0 Entonces
+                negativos <- negativos + 1
+            FinSi
+        FinSi
+    FinPara
+    Escribir "Cantidad de positivos: ", positivos
+    Escribir "Cantidad de negativos: ", negativos
+FinAlgoritmo
+        </pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Desarrollado para enseñar PSeInt de forma interactiva y divertida. &copy; 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
